@@ -1,7 +1,10 @@
 #include "Task.hpp"
+#include <StorageManager.hpp>
+
 
 #include <vector>
 #include <string>
+
 
 
 class TodoList
@@ -12,6 +15,7 @@ class TodoList
         void loadList();
         int nextTaskId();
         void reassignTaskIds();
+        StorageManager storage;
 
     public:
         TodoList();
