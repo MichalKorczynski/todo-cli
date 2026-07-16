@@ -1,4 +1,6 @@
 #include "TodoList.hpp"
+#include <algorithm>
+
 
 TodoList::TodoList() : storage("tasks.txt")
 {   
@@ -49,4 +51,38 @@ void TodoList::addTask(
 
     tasks.push_back(newTask);
     saveList();
+}
+
+void TodoList::removeTask(int id)
+{
+    auto it = std::find_if(
+        tasks.begin(),
+        tasks.end(),
+        [id](const Task& t)
+        {
+            return t.id == id;
+        }
+    );
+
+    if(it != tasks.end())
+    {
+        tasks.erase(it);
+    }
+}
+
+void TodoList::removeTask(std::string title)
+{
+    auto it = std::find_if(
+        tasks.begin(),
+        tasks.end(),
+        [title](const Task& t)
+        {
+            return t.title == title;
+        }
+    );
+
+    if(it != tasks.end())
+    {
+        tasks.erase(it);
+    }
 }
