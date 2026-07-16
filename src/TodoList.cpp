@@ -18,11 +18,6 @@ void TodoList::loadList()
     tasks = storage.loadTasks();
 }
 
-int TodoList::nextTaskId()
-{
-    return tasks.size() + 1;
-}
-
 void TodoList::reassignTaskIds()
 {
     int id = 1;
@@ -39,18 +34,12 @@ void TodoList::addTask(
     int priority
 )
 {
-    reassignTaskIds();
-
-    Task newTask{
-        false,
-        nextTaskId(),
-        priority,
-        title,
-        description,
-        dueDate
-    };
+    Task newTask = Task::create(title, description, dueDate, priority);
 
     tasks.push_back(newTask);
+
+    reassignTaskIds();
+
     saveList();
 }
 
