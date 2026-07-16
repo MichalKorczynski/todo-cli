@@ -1,5 +1,6 @@
 #include "TodoList.hpp"
 #include <algorithm>
+#include <iostream>
 
 
 TodoList::TodoList() : storage("tasks.txt")
@@ -67,6 +68,8 @@ void TodoList::removeTask(int id)
     if(it != tasks.end())
     {
         tasks.erase(it);
+        reassignTaskIds();
+        saveList();
     }
 }
 
@@ -84,5 +87,33 @@ void TodoList::removeTask(std::string title)
     if(it != tasks.end())
     {
         tasks.erase(it);
+        reassignTaskIds();
+        saveList();
     }
+}
+
+void TodoList::displayList()
+{
+    std::cout << "Todo: \n";
+    
+    for(const auto task : tasks)
+    {
+        std::cout << "  " << task.id << ". " << task.title << "\n";
+    }
+
+    std::cout << "\n";
+}
+
+void TodoList::displayListWithDetails()
+{
+    std::cout << "Todo: \n";
+    
+    for(const auto task : tasks)
+    {
+        std::cout << "  " << task.id << ". " << task.title << "\n";
+        std::cout << "      " << task.description << "\n";
+        std::cout << "      " << task.dueDate << "\n";
+    }
+
+    std::cout << "\n";
 }

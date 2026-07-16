@@ -1,5 +1,5 @@
 #include "Task.hpp"
-#include <StorageManager.hpp>
+#include "StorageManager.hpp"
 
 #include <vector>
 #include <string>
@@ -18,6 +18,10 @@ class TodoList
 
     public:
         TodoList();
+
+        void displayList();
+        void displayListWithDetails();
+
         void addTask(
             std::string title,
             std::string description = "-",
